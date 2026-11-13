@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>لوحة العروض — سيتي ناس</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5fa;--surface:#fff;--ink:#071e56;--muted:#5d6782;--line:#dbe1ee;--brand:#d99914;--brand-ink:#fff;--danger:#c0392b;--soft:#f7f9fd}
+@media (prefers-color-scheme:dark){:root{--bg:#04194f;--surface:#0b2766;--ink:#eef2fb;--muted:#aab6d3;--line:#1f3d82;--soft:#08215c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Tajawal',system-ui,sans-serif;font-size:15px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 14px;cursor:pointer;font-weight:700;white-space:nowrap}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.danger{color:var(--danger)}
+.btn.sm{padding:5px 10px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:default}
+.login{position:fixed;inset:0;z-index:40;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:16px}
+.login form{width:100%;max-width:360px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px 18px;text-align:center}
+.login h1{font-size:20px;margin:0 0 4px}.login p{margin:0 0 16px;color:var(--muted);font-size:14px}
+.login input{width:100%;font-size:17px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);margin-bottom:12px}
+.login .btn{width:100%;padding:12px;font-size:16px}.err{color:var(--danger);font-size:14px;min-height:20px;margin-top:10px}
+.top{position:sticky;top:0;z-index:10;background:#071e56;color:#fff;display:flex;gap:6px;align-items:center;padding:10px 12px}
+.top b{flex:1;min-width:0;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top a,.top .lnk{color:#fff;background:transparent;border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:6px 10px;font-size:13px;text-decoration:none;cursor:pointer}
+.dirty{font-size:12px;background:#f0b52e;color:#071e56;border-radius:100px;padding:2px 10px}
+main{max-width:760px;margin:0 auto;padding:14px 16px 96px}
+.hint{color:var(--muted);font-size:13.5px;margin:0 0 12px}
+.drop{display:block;width:100%;border:2px dashed var(--brand);background:var(--surface);border-radius:16px;padding:22px 14px;text-align:center;cursor:pointer;color:var(--ink);margin-bottom:14px}
+.drop.over{background:var(--soft)}
+.drop b{display:block;font-size:17px;color:var(--brand)}.drop span{font-size:13px;color:var(--muted)}
+.prog{font-size:13px;color:var(--muted);text-align:center;margin:-6px 0 12px;min-height:18px}
+.list{display:grid;gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px;display:grid;grid-template-columns:120px 1fr;gap:12px}
+.card.off{opacity:.55}
+.card .pic{position:relative;border-radius:10px;overflow:hidden;background:#000;aspect-ratio:1/1;cursor:pointer}
+.card .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.card .pic .ch{position:absolute;bottom:0;inset-inline:0;background:rgba(0,0,0,.6);color:#fff;font-size:12px;text-align:center;padding:3px}
+.card .tag{position:absolute;top:5px;inset-inline-start:5px;background:var(--danger);color:#fff;font-size:11px;border-radius:6px;padding:1px 6px}
+.ctl{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.ctl .n{font-weight:800;flex:1;min-width:60px}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid .full{grid-column:1/-1}
+label.f{display:block;font-size:12.5px;color:var(--muted);font-weight:700}
+label.f input{display:block;width:100%;margin-top:3px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--soft);font-size:15px;color:var(--ink)}
+input[dir=ltr]{text-align:left}
+@media (max-width:560px){.card{grid-template-columns:1fr}.card .pic{max-width:220px;margin:0 auto;width:100%}.grid{grid-template-columns:1fr}}
+.empty{text-align:center;color:var(--muted);padding:26px 10px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:12px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1}
+.savebar{position:fixed;bottom:0;inset-inline:0;background:var(--surface);border-top:1px solid var(--line);padding:10px 16px;display:flex;gap:8px;justify-content:center;z-index:9}
+.savebar .btn{min-width:150px}
+</style>
+</head>
+<body>
+<div class="login" id="loginView"><form id="loginForm">
+  <h1>لوحة عروض سيتي ناس</h1><p>للمشرف فقط</p>
+  <input id="em" type="hidden" value="admin@tanourko-menu.com" autocomplete="username">
+  <input id="pw" type="password" placeholder="كلمة المرور" required autocomplete="current-password" aria-label="كلمة المرور">
+  <button class="btn primary" id="loginBtn">دخول</button><div class="err" id="loginErr" role="alert"></div>
+</form></div>
+
+<div class="top"><b>🏷️ عروض سيتي ناس</b><span class="dirty" id="dirty" hidden>غير منشور</span><a href="citynas-v2.html#offers" target="_blank" rel="noopener">فتح الموقع</a><button class="lnk" id="logout" type="button">خروج</button></div>
+<main>
+  <button class="drop" id="drop" type="button"><b>➕ إضافة صور عروض</b><span>اضغط واختر صورة أو أكثر من الجوال — أو اسحبها هنا</span></button><input type="file" id="fileIn" accept="image/*" multiple hidden>
+  <div class="prog" id="prog" aria-live="polite"></div>
+  <p class="hint">رتّب العروض بالأسهم، اكتب عنوان إذا تبي (اختياري)، وحط تاريخ انتهاء والعرض يختفي من الموقع لحاله بعده. بعد ما تخلص اضغط «حفظ ونشر».</p>
+  <div class="list" id="list"></div>
+</main>
+<div class="savebar"><button class="btn primary" id="saveBtn">💾 حفظ ونشر</button><button class="btn" id="revertBtn">تراجع</button></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.79.0/dist/umd/supabase.js"></script>
+<script>
+(function(){
+"use strict";
+var SB_URL='https://iekotptltmkjmieauhqc.supabase.co';
+var SB_KEY='sb_publishable_35u5V1apSr2-DCpjp8ltmg_gIJzhXEN';
+var BUCKET='menu-images', DATA_PATH='citynas/offers.json';
+var DATA_URL=SB_URL+'/storage/v1/object/public/'+BUCKET+'/'+DATA_PATH;
+var DRAFT='citynas_offers_draft';
+var $=function(id){return document.getElementById(id)};
+var sb=null,S=null,published=null,dirty=false;
+
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function uid(){return 'o'+Date.now().toString(36)+Math.random().toString(36).slice(2,5)}
+function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+var tt;function toast(m,ms){var t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},ms||2600)}
+function setDirty(v){dirty=v;$('dirty').hidden=!v;try{v?localStorage.setItem(DRAFT,JSON.stringify(S)):localStorage.removeItem(DRAFT)}catch(e){}}
+function normalize(d){d=d||{};return {v:1,savedAt:d.savedAt||0,offers:Array.isArray(d.offers)?d.offers:[]}}
+
+/* ---------- login (نفس حساب مشرف تنوركو) ---------- */
+if(!window.supabase){$('loginErr').textContent='تعذر تحميل نظام الدخول. تأكد من الإنترنت.';return}
+sb=window.supabase.createClient(SB_URL,SB_KEY);
+async function enter(user){
+  var r=await sb.from('menu_admins').select('email').ilike('email',user.email).maybeSingle();
+  if(r.error||!r.data){await sb.auth.signOut();$('loginErr').textContent='هذا الحساب ما عنده صلاحية المشرف';return}
+  $('loginView').style.display='none';load();
+}
+sb.auth.getSession().then(function(x){if(x.data.session)enter(x.data.session.user)});
+$('loginForm').onsubmit=async function(e){
+  e.preventDefault();$('loginErr').textContent='';$('loginBtn').disabled=true;
+  var r=await sb.auth.signInWithPassword({email:$('em').value,password:$('pw').value});
+  $('loginBtn').disabled=false;
+  if(r.error){$('loginErr').textContent=/Invalid/i.test(r.error.message)?'كلمة المرور غلط':r.error.message;return}
+  enter(r.data.user);
+};
+$('logout').onclick=async function(){await sb.auth.signOut();location.reload()};
+
+/* ---------- load / save ---------- */
+async function load(){
+  var d=null;
+  try{var r=await fetch(DATA_URL+'?t='+Date.now(),{cache:'no-store'});if(r.ok)d=await r.json()}catch(e){}
+  published=normalize(d);S=clone(published);
+  try{var dr=JSON.parse(localStorage.getItem(DRAFT)||'null');
+    if(dr&&(dr.savedAt||0)===published.savedAt&&confirm('عندك تعديلات غير منشورة من قبل. تبي ترجعها؟')){S=normalize(dr);setDirty(true)}else setDirty(false);
+  }catch(e){}
+  render();
+}
+$('saveBtn').onclick=async function(){
+  var b=this;b.disabled=true;b.textContent='جارٍ النشر…';
+  try{
+    var out=clone(S);out.v=1;out.savedAt=Date.now();
+    var r=await sb.storage.from(BUCKET).upload(DATA_PATH,new Blob([JSON.stringify(out)],{type:'application/json'}),{upsert:true,contentType:'application/json',cacheControl:'30'});
+    if(r.error)throw r.error;
+    S=out;published=clone(out);setDirty(false);toast('✅ تم النشر — العروض صارت على الموقع');
+  }catch(e){toast('❌ ما تم الحفظ: '+(e.message||e),5000)}
+  b.disabled=false;b.textContent='💾 حفظ ونشر';
+};
+$('revertBtn').onclick=function(){if(!dirty)return toast('ما في تعديلات');if(confirm('تلغي كل التعديلات غير المنشورة؟')){S=clone(published);setDirty(false);render()}};
+window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue=''}});
+
+/* ---------- upload ---------- */
+function compressImage(file,max){
+  return new Promise(function(res){
+    if(/gif|svg/.test(file.type))return res(file);
+    var img=new Image(),u=URL.createObjectURL(file);
+    img.onload=function(){
+      var w=img.naturalWidth,h=img.naturalHeight,k=Math.min(1,max/Math.max(w,h));
+      var c=document.createElement('canvas');c.width=Math.round(w*k);c.height=Math.round(h*k);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);
+      c.toBlob(function(b){res(b&&b.size<file.size?b:file)},'image/jpeg',0.85);
+    };
+    img.onerror=function(){URL.revokeObjectURL(u);res(file)};img.src=u;
+  });
+}
+async function uploadImage(file){
+  var blob=await compressImage(file,1600);
+  var ext=blob.type==='image/jpeg'?'jpg':((file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg');
+  var path='citynas/offers/'+Date.now()+'-'+Math.random().toString(36).slice(2,8)+'.'+ext;
+  var r=await sb.storage.from(BUCKET).upload(path,blob,{contentType:blob.type||file.type,cacheControl:'31536000'});
+  if(r.error)throw r.error;
+  return sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+}
+async function addFiles(files,replaceIdx){
+  files=Array.prototype.filter.call(files||[],function(f){return /^image\//.test(f.type)});
+  if(!files.length)return;
+  var done=0,failed=[];
+  for(var n=0;n<files.length;n++){
+    $('prog').textContent='جارٍ رفع الصورة '+(n+1)+' من '+files.length+'…';
+    try{
+      var u=await uploadImage(files[n]);
+      if(replaceIdx!=null)S.offers[replaceIdx].img=u;
+      else S.offers.unshift({id:uid(),show:true,img:u,ar:'',en:'',ur:'',until:''});
+      done++;setDirty(true);render();
+    }catch(err){failed.push(files[n].name+': '+(err.message||err))}
+  }
+  $('prog').textContent='';
+  if(failed.length)toast('⚠️ تم رفع '+done+'، وفشل: '+failed.join(' | '),7000);
+  else toast('✅ تم رفع '+done+' — اضغط «حفظ ونشر»');
+}
+var replaceIdx=null;
+$('fileIn').onchange=function(){var f=this.files,i=replaceIdx;replaceIdx=null;this.multiple=true;addFiles(f,i);this.value=''};
+var drop=$('drop');
+drop.onclick=function(){replaceIdx=null;var f=$('fileIn');f.multiple=true;f.click()};
+['dragenter','dragover'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add('over')})});
+['dragleave','drop'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove('over')})});
+drop.addEventListener('drop',function(e){addFiles(e.dataTransfer.files)});
+
+/* ---------- render ---------- */
+function fld(label,i,k,val,opt){opt=opt||{};
+  return '<label class="f'+(opt.full?' full':'')+'">'+label+'<input data-i="'+i+'" data-k="'+k+'" value="'+esc(val)+'"'+(opt.ltr?' dir="ltr"':'')+(opt.type?' type="'+opt.type+'"':'')+(opt.ph?' placeholder="'+esc(opt.ph)+'"':'')+'></label>';
+}
+function render(){
+  if(!S.offers.length){$('list').innerHTML='<div class="empty">ما في عروض لحد الحين. اضغط «إضافة صور عروض» فوق 👆</div>';return}
+  var t=today();
+  $('list').innerHTML=S.offers.map(function(o,i){
+    var expired=o.until&&o.until<t;
+    return '<div class="card'+(o.show===false||expired?' off':'')+'">'+
+      '<div class="pic" data-a="replace" data-i="'+i+'" title="تغيير الصورة"><img alt="" loading="lazy" src="'+esc(o.img)+'">'+(expired?'<span class="tag">منتهي</span>':'')+'<span class="ch">🔄 تغيير الصورة</span></div>'+
+      '<div><div class="ctl"><span class="n">عرض '+(i+1)+'</span>'+
+        '<label class="sw"><input type="checkbox" data-i="'+i+'" data-k="show"'+(o.show!==false?' checked':'')+'> ظاهر</label>'+
+        '<button class="btn sm" data-a="up" data-i="'+i+'" aria-label="قبل">▲</button>'+
+        '<button class="btn sm" data-a="down" data-i="'+i+'" aria-label="بعد">▼</button>'+
+        '<button class="btn sm danger" data-a="del" data-i="'+i+'">حذف</button></div>'+
+      '<div class="grid">'+fld('العنوان (عربي) — اختياري',i,'ar',o.ar,{ph:'مثال: خصم 30% على الأواني'})+
+        fld('Title (English)',i,'en',o.en,{ltr:1})+
+        fld('عنوان (اردو)',i,'ur',o.ur)+
+        fld('ينتهي بتاريخ — اختياري',i,'until',o.until,{type:'date'})+
+      '</div></div></div>';
+  }).join('');
+}
+$('list').addEventListener('input',function(e){
+  var k=e.target.getAttribute('data-k');if(!k)return;var i=+e.target.getAttribute('data-i');
+  S.offers[i][k]=e.target.type==='checkbox'?e.target.checked:e.target.value;setDirty(true);
+  if(k==='show'||k==='until')render();
+});
+$('list').addEventListener('click',function(e){
+  var b=e.target.closest('[data-a]');if(!b)return;
+  var a=b.getAttribute('data-a'),i=+b.getAttribute('data-i'),L=S.offers;
+  if(a==='up'||a==='down'){var k=a==='up'?i-1:i+1;if(k<0||k>=L.length)return;var x=L[i];L[i]=L[k];L[k]=x;setDirty(true);render()}
+  else if(a==='del'){if(!confirm('حذف هذا العرض؟'))return;L.splice(i,1);setDirty(true);render()}
+  else if(a==='replace'){replaceIdx=i;var f=$('fileIn');f.multiple=false;f.click()}
+});
+})();
+</script>
+</body>
+</html>
