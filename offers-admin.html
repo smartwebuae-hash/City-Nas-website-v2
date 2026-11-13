@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>لوحة العروض — سيتي ناس</title>
+<title>لوحة تحكم سيتي ناس</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f3f5fa;--surface:#fff;--ink:#071e56;--muted:#5d6782;--line:#dbe1ee;--brand:#d99914;--brand-ink:#fff;--danger:#c0392b;--soft:#f7f9fd}
+:root{--bg:#f3f5fa;--surface:#fff;--ink:#071e56;--muted:#5d6782;--line:#dbe1ee;--brand:#d99914;--brand-ink:#fff;--danger:#c0392b;--soft:#f7f9fd;--wa:#1faa59}
 @media (prefers-color-scheme:dark){:root{--bg:#04194f;--surface:#0b2766;--ink:#eef2fb;--muted:#aab6d3;--line:#1f3d82;--soft:#08215c}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Tajawal',system-ui,sans-serif;font-size:15px;line-height:1.5}
@@ -23,18 +23,24 @@ button,input,select,textarea{font:inherit;color:inherit}
 .login h1{font-size:20px;margin:0 0 4px}.login p{margin:0 0 16px;color:var(--muted);font-size:14px}
 .login input{width:100%;font-size:17px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);margin-bottom:12px}
 .login .btn{width:100%;padding:12px;font-size:16px}.err{color:var(--danger);font-size:14px;min-height:20px;margin-top:10px}
-.top{position:sticky;top:0;z-index:10;background:#071e56;color:#fff;display:flex;gap:6px;align-items:center;padding:10px 12px}
+.hd{position:sticky;top:0;z-index:10}
+.top{background:#071e56;color:#fff;display:flex;gap:6px;align-items:center;padding:10px 12px}
 .top b{flex:1;min-width:0;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top a,.top .lnk{color:#fff;background:transparent;border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:6px 10px;font-size:13px;text-decoration:none;cursor:pointer}
 .dirty{font-size:12px;background:#f0b52e;color:#071e56;border-radius:100px;padding:2px 10px}
+.tabs{display:flex;gap:6px;padding:10px 12px;overflow-x:auto;background:var(--surface);border-bottom:1px solid var(--line)}
+.tab{border:1px solid var(--line);background:var(--bg);border-radius:100px;padding:7px 14px;cursor:pointer;font-weight:700;white-space:nowrap}
+.tab[aria-selected=true]{background:var(--brand);color:#fff;border-color:var(--brand)}
+.tab small{opacity:.75;font-weight:500}
 main{max-width:760px;margin:0 auto;padding:14px 16px 96px}
 .hint{color:var(--muted);font-size:13.5px;margin:0 0 12px}
-.drop{display:block;width:100%;border:2px dashed var(--brand);background:var(--surface);border-radius:16px;padding:22px 14px;text-align:center;cursor:pointer;color:var(--ink);margin-bottom:14px}
+.drop{display:block;width:100%;border:2px dashed var(--brand);background:var(--surface);border-radius:16px;padding:20px 14px;text-align:center;cursor:pointer;color:var(--ink);margin-bottom:14px}
 .drop.over{background:var(--soft)}
 .drop b{display:block;font-size:17px;color:var(--brand)}.drop span{font-size:13px;color:var(--muted)}
 .prog{font-size:13px;color:var(--muted);text-align:center;margin:-6px 0 12px;min-height:18px}
 .list{display:grid;gap:12px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px;display:grid;grid-template-columns:120px 1fr;gap:12px}
+.card.plain{display:block}
 .card.off{opacity:.55}
 .card .pic{position:relative;border-radius:10px;overflow:hidden;background:#000;aspect-ratio:1/1;cursor:pointer}
 .card .pic img{width:100%;height:100%;object-fit:cover;display:block}
@@ -46,8 +52,11 @@ main{max-width:760px;margin:0 auto;padding:14px 16px 96px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .grid .full{grid-column:1/-1}
 label.f{display:block;font-size:12.5px;color:var(--muted);font-weight:700}
-label.f input{display:block;width:100%;margin-top:3px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--soft);font-size:15px;color:var(--ink)}
+label.f input,label.f select{display:block;width:100%;margin-top:3px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--soft);font-size:15px;color:var(--ink)}
 input[dir=ltr]{text-align:left}
+.wa-box{border-color:var(--wa)}
+.wa-box h3{margin:0 0 6px;font-size:16px;color:var(--wa)}
+.add{width:100%;border:2px dashed var(--line);background:transparent;border-radius:14px;padding:14px;font-weight:800;cursor:pointer;color:var(--brand);margin-top:4px}
 @media (max-width:560px){.card{grid-template-columns:1fr}.card .pic{max-width:220px;margin:0 auto;width:100%}.grid{grid-template-columns:1fr}}
 .empty{text-align:center;color:var(--muted);padding:26px 10px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
 .toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:12px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50;max-width:calc(100% - 32px);text-align:center}
@@ -58,21 +67,18 @@ input[dir=ltr]{text-align:left}
 </head>
 <body>
 <div class="login" id="loginView"><form id="loginForm">
-  <h1>لوحة عروض سيتي ناس</h1><p>للمشرف فقط</p>
+  <h1>لوحة تحكم سيتي ناس</h1><p>العروض والمنتجات — للمشرف فقط</p>
   <input id="em" type="hidden" value="admin@tanourko-menu.com" autocomplete="username">
   <input id="pw" type="password" placeholder="كلمة المرور" required autocomplete="current-password" aria-label="كلمة المرور">
   <button class="btn primary" id="loginBtn">دخول</button><div class="err" id="loginErr" role="alert"></div>
 </form></div>
 
-<div class="top"><b>🏷️ عروض سيتي ناس</b><span class="dirty" id="dirty" hidden>غير منشور</span><a href="citynas-v2.html#offers" target="_blank" rel="noopener">فتح الموقع</a><button class="lnk" id="logout" type="button">خروج</button></div>
-<main>
-  <button class="drop" id="drop" type="button"><b>➕ إضافة صور عروض</b><span>اضغط واختر صورة أو أكثر من الجوال — أو اسحبها هنا</span></button><input type="file" id="fileIn" accept="image/*" multiple hidden>
-  <div class="prog" id="prog" aria-live="polite"></div>
-  <p class="hint">رتّب العروض بالأسهم، اكتب عنوان إذا تبي (اختياري)، وحط تاريخ انتهاء والعرض يختفي من الموقع لحاله بعده. بعد ما تخلص اضغط «حفظ ونشر».</p>
-  <div class="list" id="list"></div>
-</main>
+<header class="hd"><div class="top"><b>🏷️ لوحة تحكم سيتي ناس</b><span class="dirty" id="dirty" hidden>غير منشور</span><a href="citynas-v2.html#shop" target="_blank" rel="noopener">فتح الموقع</a><button class="lnk" id="logout" type="button">خروج</button></div>
+<nav class="tabs" role="tablist" id="tabs"></nav></header>
+<main id="main"></main>
 <div class="savebar"><button class="btn primary" id="saveBtn">💾 حفظ ونشر</button><button class="btn" id="revertBtn">تراجع</button></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="fileIn" accept="image/*" multiple hidden>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.79.0/dist/umd/supabase.js"></script>
 <script>
@@ -82,17 +88,34 @@ var SB_URL='https://iekotptltmkjmieauhqc.supabase.co';
 var SB_KEY='sb_publishable_35u5V1apSr2-DCpjp8ltmg_gIJzhXEN';
 var BUCKET='menu-images', DATA_PATH='citynas/offers.json';
 var DATA_URL=SB_URL+'/storage/v1/object/public/'+BUCKET+'/'+DATA_PATH;
-var DRAFT='citynas_offers_draft';
+var DRAFT='citynas_shop_draft';
 var $=function(id){return document.getElementById(id)};
-var sb=null,S=null,published=null,dirty=false;
+var sb=null,S=null,published=null,dirty=false,tab='offers',replaceIdx=null;
 
+var DEFAULT_SECTIONS=[
+  {id:'offers',ar:'العروض والتخفيضات',en:'Offers & Promotions',ur:'آفرز اور رعایتیں'},
+  {id:'groceries',ar:'الأغذية الطازجة والبقالة',en:'Fresh Food & Groceries',ur:'تازہ غذائیں اور گروسری'},
+  {id:'cookware',ar:'أواني الطهي',en:'Cookware',ur:'برتن اور کوکنگ ویئر'},
+  {id:'tools',ar:'أدوات المطبخ',en:'Kitchen Tools',ur:'کچن کے اوزار'},
+  {id:'home',ar:'إكسسوارات المنزل',en:'Home Accessories',ur:'گھریلو لوازمات'}
+];
 function clone(o){return JSON.parse(JSON.stringify(o))}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-function uid(){return 'o'+Date.now().toString(36)+Math.random().toString(36).slice(2,5)}
+function uid(p){return (p||'i')+Date.now().toString(36)+Math.random().toString(36).slice(2,5)}
 function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 var tt;function toast(m,ms){var t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},ms||2600)}
 function setDirty(v){dirty=v;$('dirty').hidden=!v;try{v?localStorage.setItem(DRAFT,JSON.stringify(S)):localStorage.removeItem(DRAFT)}catch(e){}}
-function normalize(d){d=d||{};return {v:1,savedAt:d.savedAt||0,offers:Array.isArray(d.offers)?d.offers:[]}}
+/* يقبل الشكل القديم (عروض فقط) ويحوّله */
+function normalize(d){
+  d=d||{};
+  var o={v:2,savedAt:d.savedAt||0,whatsapp:d.whatsapp||'971567780909',sections:[]};
+  if(Array.isArray(d.sections)&&d.sections.length)o.sections=d.sections;
+  else{o.sections=DEFAULT_SECTIONS.map(function(s){return Object.assign({show:true,items:[]},s)});if(Array.isArray(d.offers))o.sections[0].items=d.offers}
+  o.sections.forEach(function(s){s.items=Array.isArray(s.items)?s.items:[];if(s.show===undefined)s.show=true});
+  return o;
+}
+function sec(){for(var i=0;i<S.sections.length;i++)if(S.sections[i].id===tab)return S.sections[i];return null}
+function cleanNum(v){return String(v||'').replace(/[^0-9]/g,'').replace(/^00/,'')}
 
 /* ---------- login (نفس حساب مشرف تنوركو) ---------- */
 if(!window.supabase){$('loginErr').textContent='تعذر تحميل نظام الدخول. تأكد من الإنترنت.';return}
@@ -123,12 +146,13 @@ async function load(){
   render();
 }
 $('saveBtn').onclick=async function(){
+  if(cleanNum(S.whatsapp).length<9){tab='settings';render();return toast('❌ اكتب رقم واتساب صحيح أول',4000)}
   var b=this;b.disabled=true;b.textContent='جارٍ النشر…';
   try{
-    var out=clone(S);out.v=1;out.savedAt=Date.now();
+    var out=clone(S);out.v=2;out.savedAt=Date.now();out.whatsapp=cleanNum(out.whatsapp);
     var r=await sb.storage.from(BUCKET).upload(DATA_PATH,new Blob([JSON.stringify(out)],{type:'application/json'}),{upsert:true,contentType:'application/json',cacheControl:'30'});
     if(r.error)throw r.error;
-    S=out;published=clone(out);setDirty(false);toast('✅ تم النشر — العروض صارت على الموقع');
+    S=out;published=clone(out);setDirty(false);render();toast('✅ تم النشر — التعديلات صارت على الموقع');
   }catch(e){toast('❌ ما تم الحفظ: '+(e.message||e),5000)}
   b.disabled=false;b.textContent='💾 حفظ ونشر';
 };
@@ -149,73 +173,109 @@ function compressImage(file,max){
     img.onerror=function(){URL.revokeObjectURL(u);res(file)};img.src=u;
   });
 }
-async function uploadImage(file){
+async function uploadImage(file,folder){
   var blob=await compressImage(file,1600);
   var ext=blob.type==='image/jpeg'?'jpg':((file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg');
-  var path='citynas/offers/'+Date.now()+'-'+Math.random().toString(36).slice(2,8)+'.'+ext;
+  var path='citynas/'+folder+'/'+Date.now()+'-'+Math.random().toString(36).slice(2,8)+'.'+ext;
   var r=await sb.storage.from(BUCKET).upload(path,blob,{contentType:blob.type||file.type,cacheControl:'31536000'});
   if(r.error)throw r.error;
   return sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
 }
-async function addFiles(files,replaceIdx){
+async function addFiles(files,ri){
+  var s=sec();if(!s)return;
   files=Array.prototype.filter.call(files||[],function(f){return /^image\//.test(f.type)});
   if(!files.length)return;
   var done=0,failed=[];
   for(var n=0;n<files.length;n++){
-    $('prog').textContent='جارٍ رفع الصورة '+(n+1)+' من '+files.length+'…';
+    $('prog')&&($('prog').textContent='جارٍ رفع الصورة '+(n+1)+' من '+files.length+'…');
     try{
-      var u=await uploadImage(files[n]);
-      if(replaceIdx!=null)S.offers[replaceIdx].img=u;
-      else S.offers.unshift({id:uid(),show:true,img:u,ar:'',en:'',ur:'',until:''});
+      var u=await uploadImage(files[n],s.id==='offers'?'offers':'products');
+      if(ri!=null)s.items[ri].img=u;
+      else s.items.unshift({id:uid('o'),show:true,img:u,ar:'',en:'',ur:'',price:'',until:''});
       done++;setDirty(true);render();
     }catch(err){failed.push(files[n].name+': '+(err.message||err))}
   }
-  $('prog').textContent='';
+  if($('prog'))$('prog').textContent='';
   if(failed.length)toast('⚠️ تم رفع '+done+'، وفشل: '+failed.join(' | '),7000);
   else toast('✅ تم رفع '+done+' — اضغط «حفظ ونشر»');
 }
-var replaceIdx=null;
-$('fileIn').onchange=function(){var f=this.files,i=replaceIdx;replaceIdx=null;this.multiple=true;addFiles(f,i);this.value=''};
-var drop=$('drop');
-drop.onclick=function(){replaceIdx=null;var f=$('fileIn');f.multiple=true;f.click()};
-['dragenter','dragover'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add('over')})});
-['dragleave','drop'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove('over')})});
-drop.addEventListener('drop',function(e){addFiles(e.dataTransfer.files)});
+$('fileIn').onchange=function(){var f=this.files,i=replaceIdx;replaceIdx=null;addFiles(f,i);this.value=''};
+function pick(ri){replaceIdx=ri;var f=$('fileIn');f.multiple=ri==null;f.click()}
 
 /* ---------- render ---------- */
-function fld(label,i,k,val,opt){opt=opt||{};
-  return '<label class="f'+(opt.full?' full':'')+'">'+label+'<input data-i="'+i+'" data-k="'+k+'" value="'+esc(val)+'"'+(opt.ltr?' dir="ltr"':'')+(opt.type?' type="'+opt.type+'"':'')+(opt.ph?' placeholder="'+esc(opt.ph)+'"':'')+'></label>';
+function fld(label,attrs,val,opt){opt=opt||{};
+  return '<label class="f'+(opt.full?' full':'')+'">'+label+'<input '+attrs+' value="'+esc(val)+'"'+(opt.ltr?' dir="ltr"':'')+(opt.type?' type="'+opt.type+'"':'')+(opt.ph?' placeholder="'+esc(opt.ph)+'"':'')+(opt.mode?' inputmode="'+opt.mode+'"':'')+'></label>';
+}
+function renderTabs(){
+  var h=S.sections.map(function(s){
+    return '<button class="tab" role="tab" data-t="'+esc(s.id)+'" aria-selected="'+(tab===s.id)+'">'+(s.id==='offers'?'🏷️ ':'')+esc(s.ar||'قسم')+' <small>('+s.items.length+')</small></button>';
+  }).join('')+'<button class="tab" role="tab" data-t="settings" aria-selected="'+(tab==='settings')+'">⚙️ واتساب والأقسام</button>';
+  $('tabs').innerHTML=h;
 }
 function render(){
-  if(!S.offers.length){$('list').innerHTML='<div class="empty">ما في عروض لحد الحين. اضغط «إضافة صور عروض» فوق 👆</div>';return}
-  var t=today();
-  $('list').innerHTML=S.offers.map(function(o,i){
+  if(tab!=='settings'&&!sec())tab=S.sections.length?S.sections[0].id:'settings';
+  renderTabs();
+  var h='';
+  if(tab==='settings'){
+    h+='<div class="card plain wa-box"><h3>رقم واتساب للطلبات</h3><p class="hint">كل طلبات الزباين (زر «اطلب واتساب» والسلة) تروح لهذا الرقم. اكتبه مع مفتاح الدولة بدون + (مثال: 971567780909).</p>'+
+      fld('رقم الواتساب','data-g="whatsapp"',S.whatsapp,{ltr:1,mode:'tel',ph:'971567780909',full:1})+
+      '<div class="row" style="margin-top:8px"><a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/'+esc(cleanNum(S.whatsapp))+'">جرّب الرقم ↗</a></div></div>';
+    h+='<p class="hint" style="margin-top:16px">الأقسام اللي تظهر في الموقع. القسم الفاضي ما يظهر للزباين.</p><div class="list">';
+    S.sections.forEach(function(s,i){
+      h+='<div class="card plain'+(s.show===false?' off':'')+'"><div class="ctl"><span class="n">'+esc(s.ar||'قسم')+' — '+s.items.length+' صورة</span>'+
+        '<label class="sw"><input type="checkbox" data-s="'+i+'" data-k="show"'+(s.show!==false?' checked':'')+'> ظاهر</label>'+
+        '<button class="btn sm" data-a="sup" data-i="'+i+'" aria-label="فوق">▲</button><button class="btn sm" data-a="sdown" data-i="'+i+'" aria-label="تحت">▼</button>'+
+        (s.id==='offers'?'':'<button class="btn sm danger" data-a="sdel" data-i="'+i+'">حذف القسم</button>')+'</div>'+
+        '<div class="grid">'+fld('اسم القسم (عربي)','data-s="'+i+'" data-k="ar"',s.ar)+fld('Name (English)','data-s="'+i+'" data-k="en"',s.en,{ltr:1})+fld('نام (اردو)','data-s="'+i+'" data-k="ur"',s.ur)+'</div></div>';
+    });
+    h+='</div><button class="add" data-a="sadd">+ إضافة قسم جديد</button>';
+    $('main').innerHTML=h;return;
+  }
+  var s=sec(),isOff=s.id==='offers',t=today();
+  h+='<button class="drop" id="drop" type="button"><b>➕ إضافة صور — '+esc(s.ar)+'</b><span>اضغط واختر صورة أو أكثر — أو اسحبها هنا</span></button><div class="prog" id="prog" aria-live="polite"></div>';
+  h+='<p class="hint">تحت كل صورة في الموقع يطلع زر «اطلب واتساب» وزر السلة. الاسم والسعر اختياريين بس يساعدون الزبون'+(isOff?'، وتاريخ الانتهاء يخفي العرض لحاله بعده':'')+'. بعد ما تخلص اضغط «حفظ ونشر».</p><div class="list">';
+  if(!s.items.length)h+='<div class="empty">ما في صور في هذا القسم. اضغط «إضافة صور» فوق 👆</div>';
+  s.items.forEach(function(o,i){
     var expired=o.until&&o.until<t;
-    return '<div class="card'+(o.show===false||expired?' off':'')+'">'+
+    h+='<div class="card'+(o.show===false||expired?' off':'')+'">'+
       '<div class="pic" data-a="replace" data-i="'+i+'" title="تغيير الصورة"><img alt="" loading="lazy" src="'+esc(o.img)+'">'+(expired?'<span class="tag">منتهي</span>':'')+'<span class="ch">🔄 تغيير الصورة</span></div>'+
-      '<div><div class="ctl"><span class="n">عرض '+(i+1)+'</span>'+
+      '<div><div class="ctl"><span class="n">'+esc(o.ar||('صورة '+(i+1)))+'</span>'+
         '<label class="sw"><input type="checkbox" data-i="'+i+'" data-k="show"'+(o.show!==false?' checked':'')+'> ظاهر</label>'+
         '<button class="btn sm" data-a="up" data-i="'+i+'" aria-label="قبل">▲</button>'+
         '<button class="btn sm" data-a="down" data-i="'+i+'" aria-label="بعد">▼</button>'+
         '<button class="btn sm danger" data-a="del" data-i="'+i+'">حذف</button></div>'+
-      '<div class="grid">'+fld('العنوان (عربي) — اختياري',i,'ar',o.ar,{ph:'مثال: خصم 30% على الأواني'})+
-        fld('Title (English)',i,'en',o.en,{ltr:1})+
-        fld('عنوان (اردو)',i,'ur',o.ur)+
-        fld('ينتهي بتاريخ — اختياري',i,'until',o.until,{type:'date'})+
+      '<div class="grid">'+fld('الاسم (عربي)','data-i="'+i+'" data-k="ar"',o.ar,{ph:isOff?'مثال: خصم 30% على الأواني':'مثال: طقم قدور 10 قطع'})+
+        fld('Name (English)','data-i="'+i+'" data-k="en"',o.en,{ltr:1})+
+        fld('نام (اردو)','data-i="'+i+'" data-k="ur"',o.ur)+
+        fld('السعر بالدرهم — اختياري','data-i="'+i+'" data-k="price"',o.price,{mode:'decimal',ph:'مثال: 49'})+
+        (isOff?fld('ينتهي بتاريخ — اختياري','data-i="'+i+'" data-k="until"',o.until,{type:'date'}):'')+
       '</div></div></div>';
-  }).join('');
+  });
+  h+='</div>';
+  $('main').innerHTML=h;
+  var drop=$('drop');drop.onclick=function(){pick(null)};
+  ['dragenter','dragover'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('over')})});
+  ['dragleave','drop'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove('over')})});
+  drop.addEventListener('drop',function(e){addFiles(e.dataTransfer.files)});
 }
-$('list').addEventListener('input',function(e){
-  var k=e.target.getAttribute('data-k');if(!k)return;var i=+e.target.getAttribute('data-i');
-  S.offers[i][k]=e.target.type==='checkbox'?e.target.checked:e.target.value;setDirty(true);
+$('tabs').addEventListener('click',function(e){var b=e.target.closest('[data-t]');if(!b)return;tab=b.getAttribute('data-t');render();window.scrollTo(0,0)});
+$('main').addEventListener('input',function(e){
+  var el=e.target,k=el.getAttribute('data-k'),v=el.type==='checkbox'?el.checked:el.value;
+  if(el.getAttribute('data-g')==='whatsapp'){S.whatsapp=v;setDirty(true);return}
+  if(!k)return;
+  if(el.hasAttribute('data-s')){S.sections[+el.getAttribute('data-s')][k]=v;setDirty(true);if(k==='show')render();else renderTabs();return}
+  sec().items[+el.getAttribute('data-i')][k]=v;setDirty(true);
   if(k==='show'||k==='until')render();
 });
-$('list').addEventListener('click',function(e){
+$('main').addEventListener('click',function(e){
   var b=e.target.closest('[data-a]');if(!b)return;
-  var a=b.getAttribute('data-a'),i=+b.getAttribute('data-i'),L=S.offers;
-  if(a==='up'||a==='down'){var k=a==='up'?i-1:i+1;if(k<0||k>=L.length)return;var x=L[i];L[i]=L[k];L[k]=x;setDirty(true);render()}
-  else if(a==='del'){if(!confirm('حذف هذا العرض؟'))return;L.splice(i,1);setDirty(true);render()}
-  else if(a==='replace'){replaceIdx=i;var f=$('fileIn');f.multiple=false;f.click()}
+  var a=b.getAttribute('data-a'),i=+b.getAttribute('data-i'),L,k,x;
+  if(a==='replace')return pick(i);
+  if(a==='up'||a==='down'||a==='sup'||a==='sdown'){L=a.charAt(0)==='s'?S.sections:sec().items;k=/up$/.test(a)?i-1:i+1;if(k<0||k>=L.length)return;x=L[i];L[i]=L[k];L[k]=x;setDirty(true);render()}
+  else if(a==='del'){if(!confirm('حذف هذه الصورة؟'))return;sec().items.splice(i,1);setDirty(true);render()}
+  else if(a==='sdel'){var s=S.sections[i];if(!confirm('حذف قسم «'+(s.ar||'')+'» وكل صوره ('+s.items.length+')؟'))return;S.sections.splice(i,1);setDirty(true);render()}
+  else if(a==='sadd'){S.sections.push({id:uid('s'),show:true,ar:'قسم جديد',en:'New section',ur:'',items:[]});setDirty(true);render();
+    var c=document.querySelectorAll('.card');var last=c[c.length-1];if(last){last.scrollIntoView({behavior:'smooth',block:'center'});var inp=last.querySelector('input[data-k=ar]');if(inp){inp.focus();inp.select()}}}
 });
 })();
 </script>
